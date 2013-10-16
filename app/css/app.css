@@ -1,0 +1,29 @@
+/* line 1, ../sass/app.scss */
+.menu {
+  list-style: none;
+  border-bottom: 0.1em solid black;
+  margin-bottom: 2em;
+  padding: 0 0 0.5em;
+}
+/* line 6, ../sass/app.scss */
+.menu:before {
+  content: "[";
+}
+/* line 9, ../sass/app.scss */
+.menu:after {
+  content: "]";
+}
+/* line 12, ../sass/app.scss */
+.menu > li {
+  display: inline;
+}
+/* line 14, ../sass/app.scss */
+.menu > li:before {
+  content: "|";
+  padding-right: 0.3em;
+}
+/* line 18, ../sass/app.scss */
+.menu > li:nth-child(1):before {
+  content: "";
+  padding: 0;
+}

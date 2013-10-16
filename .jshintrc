@@ -1,0 +1,22 @@
+// https://github.com/jshint/jshint/blob/master/examples/.jshintrc
+{
+	"curly": true,
+  	"eqnull": true,
+	"eqeqeq": true,
+	"undef": true,
+	"browser": true,
+	"strict": true,
+	"globals": {
+		"console": true,
+	    "angular": true,
+	    "define": true,
+	    "require": true,
+	    // testing
+	    "beforeEach": true,
+	    "it": true,
+	    "expect": true,
+	    "describe": true,
+	    "browser": true,
+	    "sleep": true
+	}
+}
