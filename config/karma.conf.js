@@ -16,8 +16,13 @@ module.exports = function(config) {
 	autoWatch: true,
 
 	LogLevel: LOG_DEBUG,
-
-	browsers: ['Firefox'],
+	// Possible browser
+	// Chrome
+	// ChromeCanary
+	// Firefox
+	// Opera
+	// Safari
+	browsers: ['Firefox', 'Chrome'],
 
 	junitReporter: {
 		outputFile: 'test_out/unit.xml',

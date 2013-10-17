@@ -29,7 +29,6 @@ module.exports = (grunt) ->
 				options: {
 				port: 8000,
 				keepalive: true,
-				debug: true,
 				open: true,
 				livereload: true
 				}
@@ -49,7 +48,10 @@ module.exports = (grunt) ->
 			}
 			js: {
 				files: ['<%= js_files %>'],
-				tasks: ['jshint']
+				tasks: ['jshint'],
+				options: {
+					livereload:true
+				}
 			}
 		},
 		requirejs: {
@@ -76,6 +78,14 @@ module.exports = (grunt) ->
 				}
 			}
 		},
+		karma: {
+			unit: {
+				configFile: 'config/karma.conf.js'
+			},
+			e2e: {
+				configFile: 'config/karma-e2e.conf.js'
+			}
+		},
 		concurrent: {
 			server: ['watch', 'connect'],
 			options: {
@@ -89,6 +99,7 @@ module.exports = (grunt) ->
 		'grunt-contrib-connect',
 		'grunt-contrib-watch',
 		'grunt-contrib-requirejs',
+		'grunt-karma',
 		'grunt-concurrent'
 	]
 	grunt.loadNpmTasks(task) for task in npmTasks
@@ -96,3 +107,4 @@ module.exports = (grunt) ->
 	grunt.registerTask 'lint', ['jshint']
 	grunt.registerTask 'server', ['concurrent:server']
 	grunt.registerTask 'build', ['jshint', 'compass:dist', 'requirejs']
+	grunt.registerTask 'test', ['karma']

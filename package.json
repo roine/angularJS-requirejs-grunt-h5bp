@@ -10,12 +10,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/tnajdek/angular-requirejs-seed.git"
+    "url": "git@github.com:roine/angularJS-boosted.git"
   },
   "author": "Jonathan de Montalembert <demonj92@gmail.com>",
   "license": "MIT",
   "readmeFilename": "README.md",
-  "gitHead": "22263bfe493ebc74437c80fc4b4d37c24d1aa6f4",
   "devDependencies": {
     "karma-script-launcher": "~0.1.0",
     "karma-chrome-launcher": "~0.1.0",
@@ -33,6 +32,7 @@
     "grunt-contrib-connect": "~0.5.0",
     "grunt-concurrent": "~0.4.1",
     "grunt-contrib-watch": "~0.5.3",
-    "grunt-contrib-requirejs": "~0.4.1"
+    "grunt-contrib-requirejs": "~0.4.1",
+    "grunt-karma": "~0.6.2"
   }
 }
