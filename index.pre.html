@@ -3,10 +3,12 @@
 	<head>
 		<title>Angular-RequireJS sample app</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		
-		<link rel="stylesheet" type="text/css" media="all" href="app/css/app.css?20131018" />
-		
-		
+		<!--(if target dev)>
+		<link rel="stylesheet" type="text/css" media="all" href="app/css/app.css?{{rlsdate}}" />
+		<!(endif)-->
+		<!--(if target dist)>
+		<link rel="stylesheet" type="text/css" media="all" href="app/dist/css/app.css" />
+		<!(endif)-->
 	</head>
 	<body >
 		<h1>AngularJS + RequireJS</h1>
@@ -15,10 +17,12 @@
 			<li><a href="#/view2">View 2</a></li>
 		</ul>
 		<div ng-view></div>
-		
+		<!--(if target dev)>
 		<script data-main="app/js/main" src="/bower_components/requirejs/require.js"></script>		
-		
+		<!(endif)-->
 
-		
+		<!--(if target dist)>
+		<script data-main="app/dist/js/main.built.js" src="/bower_components/requirejs/require.js"></script>
+		<!(endif)-->
 	</body>
 </html>

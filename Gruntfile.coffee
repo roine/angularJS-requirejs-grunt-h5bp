@@ -91,6 +91,23 @@ module.exports = (grunt) ->
 			options: {
 				logConcurrentOutput: true
 			}
+		},
+		targethtml: {
+			dist: {
+				files: {
+					'index.html': 'index.pre.html'
+				}
+			}
+			dev: {
+				files: {
+					'index.html': 'index.pre.html'
+				},
+				options: {
+					curlyTags: {
+			        	rlsdate: '<%= grunt.template.today("yyyymmdd") %>'
+				    }	
+				}	
+			}
 		}
 	}
 	npmTasks = [
@@ -100,11 +117,13 @@ module.exports = (grunt) ->
 		'grunt-contrib-watch',
 		'grunt-contrib-requirejs',
 		'grunt-karma',
-		'grunt-concurrent'
+		'grunt-concurrent',
+		'grunt-targethtml'
 	]
 	grunt.loadNpmTasks(task) for task in npmTasks
 
 	grunt.registerTask 'lint', ['jshint']
-	grunt.registerTask 'server', ['concurrent:server']
-	grunt.registerTask 'build', ['jshint', 'compass:dist', 'requirejs']
+	grunt.registerTask 'server:dev', ['targethtml:dev', 'concurrent:server']
+	grunt.registerTask 'server:dist', ['build', 'concurrent:server']
+	grunt.registerTask 'build', ['jshint', 'compass:dist', 'requirejs', 'targethtml:dist']
 	grunt.registerTask 'test', ['karma']
