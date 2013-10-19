@@ -123,7 +123,10 @@ module.exports = (grunt) ->
 	grunt.loadNpmTasks(task) for task in npmTasks
 
 	grunt.registerTask 'lint', ['jshint']
-	grunt.registerTask 'server:dev', ['targethtml:dev', 'concurrent:server']
-	grunt.registerTask 'server:dist', ['build', 'concurrent:server']
 	grunt.registerTask 'build', ['jshint', 'compass:dist', 'requirejs', 'targethtml:dist']
 	grunt.registerTask 'test', ['karma']
+	grunt.registerTask 'server', 'launch the server', (n) ->
+		if grunt.option('dist')
+			grunt.task.run ['build', 'concurrent:server']
+		else 
+			grunt.task.run ['targethtml:dev', 'concurrent:server']
