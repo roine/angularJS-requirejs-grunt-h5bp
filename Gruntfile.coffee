@@ -1,15 +1,26 @@
+# Note, I don't use compass to minify to be able to use autoprefixer
+# Note 2, dropped compass, too slow and useless since autoprefixer
+
 module.exports = (grunt) ->
+
+	require('time-grunt')(grunt);
+
+	files = {
+		js: ['app/**/*.js', 'test/**/*js', '!app/dist/**/*.js']
+		css: ['app/**/*.css', '!app/dist/**/*.css']
+		sass: ['app/**/*.scss']
+		img: ['app/**/*.{png,jpg,gif}']
+	}
+
 	grunt.initConfig {
 		pkg: grunt.file.readJSON('package.json'),
-		js_files: ['app/**/*.js', 'test/**/*js', '!app/dist/**/*.js'],
-		css_files: ['app/**/*.css', '!app/dist/**/*.css'],
-		sass_files: ['app/**/.scss'],
+		files: files
 		jshint: {
-			files: ['<%= js_files %>'],
+			files: ['<%= files.js %>']
 			options: {
 				jshintrc:'.jshintrc'
 			}
-		},
+		}
 		compass: {	
 			config: 'config.rb',
 			dev: {
@@ -24,6 +35,17 @@ module.exports = (grunt) ->
 				}	
 			}
 		},
+		sass: {
+			dev: {
+				options: {
+					lineNumbers: true
+					style: 'expanded'
+				}
+				files: {
+					'app/css/app.css': 'app/sass/app.scss'
+				}
+			}
+		}
 		connect: {
 			server: {
 				options: {
@@ -36,18 +58,18 @@ module.exports = (grunt) ->
 		},
 		watch: {
 			scss: {
-				files: ['<%= sass_files %>'],
-				tasks: ['compass:dev']
+				files: ['<%= files.sass %>'],
+				tasks: ['sass:dev', 'autoprefixer:dev']
 			}
 			css: {
-				files: ['<%= css_files %>'],
+				files: ['<%= files.css %>']
 				options: {
 					livereload: true,
 					spawn: false
 				}
 			}
 			js: {
-				files: ['<%= js_files %>'],
+				files: ['<%= files.js %>'],
 				tasks: ['jshint'],
 				options: {
 					livereload:true
@@ -108,22 +130,43 @@ module.exports = (grunt) ->
 				    }	
 				}	
 			}
+		},
+		autoprefixer: {
+			options: {
+				# https://github.com/ai/autoprefixer#browsers
+				browsers: ["last 1 version", "> 1%", "ie 8", "ie 7"]
+			}
+			dev: {
+				src: '<%= files.css %>'
+				dest: 'app/css/app.css'
+			}
+			dist: {
+				src: 'app/dist/css/app.css',
+				dest: 'app/dist/css/app.css'
+			}
+		},
+		cssmin: {
+			'app/dist/css/app.css': '<%= files.css %>'
 		}
 	}
 	npmTasks = [
-		'grunt-contrib-jshint',
-		'grunt-contrib-compass',
-		'grunt-contrib-connect',
-		'grunt-contrib-watch',
-		'grunt-contrib-requirejs',
-		'grunt-karma',
-		'grunt-concurrent',
+		'grunt-contrib-jshint'
+		'grunt-contrib-compass'
+		'grunt-contrib-connect'
+		'grunt-contrib-watch'
+		'grunt-contrib-requirejs'
+		'grunt-karma'
+		'grunt-concurrent'
 		'grunt-targethtml'
+		'grunt-autoprefixer'
+		'grunt-contrib-cssmin'
+		'grunt-contrib-sass'
 	]
 	grunt.loadNpmTasks(task) for task in npmTasks
 
+
 	grunt.registerTask 'lint', ['jshint']
-	grunt.registerTask 'build', ['jshint', 'compass:dist', 'requirejs', 'targethtml:dist']
+	grunt.registerTask 'build', ['autoprefixer:dev', 'cssmin', 'jshint', 'requirejs', 'targethtml:dist']
 	grunt.registerTask 'test', ['karma']
 	grunt.registerTask 'server', 'launch the server', (n) ->
 		if grunt.option('dist')
