@@ -13,12 +13,12 @@ Contains all you need to boost your workflow:
 #Getting started
 
 
-Before to start you'll need to install **node** with **npm**, **bower**.
+In order to use this seed you'll need to install **node** with **npm** and **bower**.
 
  - [How to install node and npm?](http://www.joyent.com/blog/installing-node-and-npm)
  - [How to install bower?](http://bower.io/) (install npm first)
 
-Once done clone this repository and go into the folder.
+Once done clone this repository and go into the folder. Should be fast, the seed is pretty light
 
     git clone git@github.com:roine/angularJS-boosted.git && cd $_
     
