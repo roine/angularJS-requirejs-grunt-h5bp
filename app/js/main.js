@@ -19,8 +19,31 @@ require.config({
 	]
 });
 
+
 // hey Angular, we're bootstrapping manually!
 window.name = "NG_DEFER_BOOTSTRAP!";
+
+
+// Avoid `console` errors in browsers that lack a console.
+var method;
+var noop = function () {};
+var methods = [
+    'assert', 'clear', 'count', 'debug', 'dir', 'dirxml', 'error',
+    'exception', 'group', 'groupCollapsed', 'groupEnd', 'info', 'log',
+    'markTimeline', 'profile', 'profileEnd', 'table', 'time', 'timeEnd',
+    'timeStamp', 'trace', 'warn'
+];
+var len = methods.length;
+var console = (window.console = window.console || {});
+
+while (len--) {
+    method = methods[len];
+
+    // Only stub undefined methods.
+    if (!console[method]) {
+        console[method] = noop;
+    }
+}
 
 require( [
 	'angular',

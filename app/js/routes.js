@@ -1,7 +1,8 @@
 define(['angular', 'app'], function(angular, app) {
 	'use strict';
 
-	return app.config(['$routeProvider', function($routeProvider) {
+	return app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+		$locationProvider.hashPrefix('!');
 		$routeProvider.when('/view1', {
 			templateUrl: 'app/partials/partial1.html',
 			controller: 'MyCtrl1'

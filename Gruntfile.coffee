@@ -137,12 +137,8 @@ module.exports = (grunt) ->
 				browsers: ["last 1 version", "> 1%", "ie 8", "ie 7"]
 			}
 			dev: {
-				src: '<%= files.css %>'
+				src: 'app/css/app.css'
 				dest: 'app/css/app.css'
-			}
-			dist: {
-				src: 'app/dist/css/app.css',
-				dest: 'app/dist/css/app.css'
 			}
 		},
 		cssmin: {

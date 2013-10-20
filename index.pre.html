@@ -1,28 +1,54 @@
-<!doctype html>
-<html lang="en" class="ng-app">
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7 ng-app"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8 ng-app"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" class="no-js lt-ie9 ng-app"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" class="no-js ng-app"> <!--<![endif]-->
 	<head>
-		<title>Angular-RequireJS sample app</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Angular + RequireJS + Grunt + Boilerplate</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
 		<!--(if target dev)>
-		<link rel="stylesheet" type="text/css" media="all" href="app/css/app.css?{{rlsdate}}" />
+		<link rel="stylesheet" type="text/css" media="all" href="app/css/app.css" />
+		<link rel="stylesheet" type="text/css" media="all" href="app/css/normalize.css" />
 		<!(endif)-->
+
 		<!--(if target dist)>
 		<link rel="stylesheet" type="text/css" media="all" href="app/dist/css/app.css" />
 		<!(endif)-->
+		<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+        <script src="bower_components/modernizr/modernizr.js"></script>
 	</head>
 	<body >
+		<!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- Add your site or application content here -->
 		<h1>AngularJS + RequireJS</h1>
 		<ul class="menu">
-			<li><a href="#/view1">View 1</a></li>
-			<li><a href="#/view2">View 2</a></li>
+			<li><a href="#!/view1">View 1</a></li>
+			<li><a href="#!/view2">View 2</a></li>
 		</ul>
 		<div ng-view></div>
+
 		<!--(if target dev)>
 		<script data-main="app/js/main" src="/bower_components/requirejs/require.js"></script>		
 		<!(endif)-->
 
 		<!--(if target dist)>
 		<script data-main="app/dist/js/main.built.js" src="/bower_components/requirejs/require.js"></script>
+        <script>
+            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+            e.src='//www.google-analytics.com/analytics.js';
+            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+            ga('create','UA-XXXXX-X');ga('send','pageview');
+        </script>
 		<!(endif)-->
 	</body>
 </html>
