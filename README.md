@@ -20,7 +20,7 @@ In order to use this seed you'll need to install **node** with **npm** and **bow
 
 Once done clone this repository and go into the folder. Should be fast, the seed is pretty light
 
-    git clone git@github.com:roine/angularJS-boosted.git && cd $_
+    git clone git@github.com:roine/angularJS-boosted.git brume && cd $_
     
 Now you're going to need to download all the packages. This is awesomely easy just run the two following commands in your shell.
     

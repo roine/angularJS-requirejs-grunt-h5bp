@@ -10,6 +10,7 @@ module.exports = (grunt) ->
 		css: ['app/**/*.css', '!app/dist/**/*.css']
 		sass: ['app/**/*.scss']
 		img: ['app/**/*.{png,jpg,gif}']
+		html: ['app/**/*.html']
 	}
 
 	grunt.initConfig {
@@ -64,7 +65,7 @@ module.exports = (grunt) ->
 			css: {
 				files: ['<%= files.css %>']
 				options: {
-					livereload: true,
+					livereload: true
 					spawn: false
 				}
 			}
@@ -73,6 +74,13 @@ module.exports = (grunt) ->
 				tasks: ['jshint'],
 				options: {
 					livereload:true
+				}
+			}
+			html: {
+				files: ['<%= files.html %>'],
+				options: {
+					livereload: true
+					spawn:false
 				}
 			}
 		},
