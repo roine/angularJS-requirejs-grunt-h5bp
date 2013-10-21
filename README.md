@@ -22,7 +22,7 @@ Once done clone this repository and go into the folder. Should be fast, the seed
 
     git clone git@github.com:roine/angularJS-boosted.git brume && cd $_
     
-Now you're going to need to download all the packages. This is awesomely easy just run the two following commands in your shell.
+Now you're going to need to download all the packages. This is pretty straightforward, just run the two following commands in your shell, and you're done!
     
     $ npm install
     $ bower install
