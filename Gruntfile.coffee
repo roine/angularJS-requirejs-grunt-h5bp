@@ -10,7 +10,7 @@ module.exports = (grunt) ->
 		css: ['app/**/*.css', '!app/dist/**/*.css']
 		sass: ['app/**/*.scss']
 		img: ['app/**/*.{png,jpg,gif}']
-		html: ['app/**/*.html']
+		html: ['app/**/*.html', 'index.html']
 	}
 
 	grunt.initConfig {
@@ -70,24 +70,28 @@ module.exports = (grunt) ->
 				}
 			}
 			js: {
-				files: ['<%= files.js %>'],
-				tasks: ['jshint'],
+				files: ['<%= files.js %>']
+				tasks: ['jshint']
 				options: {
 					livereload:true
 				}
 			}
 			html: {
-				files: ['<%= files.html %>'],
+				files: ['<%= files.html %>']
 				options: {
 					livereload: true
 					spawn:false
 				}
 			}
+			index: {
+				files: ['index.pre.html']
+				tasks: ['targethtml:dev']
+			}
 		},
 		requirejs: {
 			compile: {
 				options: {
-					baseUrl: 'app/js',
+					baseUrl: 'app/js'
 					paths: {
 						angular: '../../bower_components/angular/angular',
 						angularRoute: '../../bower_components/angular-route/angular-route',
