@@ -168,7 +168,8 @@ module.exports = (grunt) ->
 		'grunt-targethtml'
 		'grunt-autoprefixer'
 		'grunt-contrib-cssmin'
-		'grunt-contrib-sass'
+		# migrated from grunt-contrib-sass because it's faster, but no line number option
+		'grunt-sass'
 	]
 	grunt.loadNpmTasks(task) for task in npmTasks
 

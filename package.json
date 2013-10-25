@@ -37,7 +37,7 @@
     "grunt-targethtml": "~0.2.6",
     "grunt-autoprefixer": "~0.3.1",
     "grunt-contrib-cssmin": "~0.6.2",
-    "grunt-contrib-sass": "~0.5.0"
+    "grunt-sass": "~0.7.0"
   },
   "dependencies": {
     "time-grunt": "~0.1.1"
