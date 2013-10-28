@@ -22,7 +22,7 @@ module.exports = function(config) {
 	// Firefox
 	// Opera
 	// Safari
-	browsers: ['Firefox', 'Chrome'],
+	browsers: ['Chrome'],
 
 	junitReporter: {
 		outputFile: 'test_out/unit.xml',

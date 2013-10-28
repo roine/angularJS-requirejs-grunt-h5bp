@@ -3,160 +3,130 @@
 
 module.exports = (grunt) ->
 
-	require('time-grunt')(grunt);
-
-	files = {
-		js: ['app/**/*.js', 'test/**/*js', '!app/dist/**/*.js']
+	files =
+		js: ['app/**/*.js', '!test/**/*js', '!app/dist/**/*.js']
 		css: ['app/**/*.css', '!app/dist/**/*.css']
 		sass: ['app/**/*.scss']
 		img: ['app/**/*.{png,jpg,gif}']
 		html: ['app/**/*.html', 'index.html']
-	}
 
-	grunt.initConfig {
-		pkg: grunt.file.readJSON('package.json'),
+	grunt.initConfig
+		pkg: grunt.file.readJSON('package.json')
 		files: files
-		jshint: {
+
+		jshint:
 			files: ['<%= files.js %>']
-			options: {
+			options:
 				jshintrc:'.jshintrc'
-			}
-		}
-		compass: {	
-			config: 'config.rb',
-			dev: {
-				options: {
+
+		compass:
+			config: 'config.rb'
+			dev:
+				options:
 					environment: 'development'
-				}
-			}
-			dist: {
-				options: {
+			dist:
+				options:
 					environment: 'production'
 					cssDir: 'app/dist/css'
-				}	
-			}
-		},
-		sass: {
-			dev: {
-				options: {
+
+		sass:
+			dev:
+				options:
 					lineNumbers: true
 					style: 'expanded'
-				}
-				files: {
+				files:
 					'app/css/app.css': 'app/sass/app.scss'
-				}
-			}
-		}
-		connect: {
-			server: {
-				options: {
-				port: 8000,
-				keepalive: true,
-				open: true,
-				livereload: true
-				}
-			}
-		},
-		watch: {
-			scss: {
-				files: ['<%= files.sass %>'],
+
+		connect:
+			server:
+				options:
+					port: 8000
+					keepalive: true
+					open: true
+					livereload: true
+
+		watch:
+			scss:
+				files: ['<%= files.sass %>']
 				tasks: ['sass:dev', 'autoprefixer:dev']
-			}
-			css: {
+			css:
 				files: ['<%= files.css %>']
-				options: {
+				options:
 					livereload: true
 					spawn: false
-				}
-			}
-			js: {
+			js:
 				files: ['<%= files.js %>']
 				tasks: ['jshint']
-				options: {
+				options:
 					livereload:true
-				}
-			}
-			html: {
+			html:
 				files: ['<%= files.html %>']
-				options: {
+				options:
 					livereload: true
 					spawn:false
-				}
-			}
-			index: {
+			index:
 				files: ['index.pre.html']
 				tasks: ['targethtml:dev']
-			}
-		},
-		requirejs: {
-			compile: {
-				options: {
+
+		requirejs:
+			compile:
+				options:
 					baseUrl: 'app/js'
-					paths: {
-						angular: '../../bower_components/angular/angular',
-						angularRoute: '../../bower_components/angular-route/angular-route',
-						angularMocks: '../../bower_components/angular-mocks/angular-mocks',
+					paths:
+						angular: '../../bower_components/angular/angular'
+						angularRoute: '../../bower_components/angular-route/angular-route'
+						angularMocks: '../../bower_components/angular-mocks/angular-mocks'
 						text: '../../bower_components/requirejs-text/text'
-					},
-					shim: {
-						'angular' : {'exports' : 'angular'},
-						'angularRoute': ['angular'],
-						'angularMocks': {
-							deps:['angular'],
+					shim:
+						'angular' :
+							'exports' : 'angular'
+						'angularRoute': ['angular']
+						'angularMocks':
+							deps:['angular']
 							'exports':'angular.mock'
-						}
-					},
-					out: 'app/dist/js/main.built.js',
-					name:'main',
-					preserveLicenseComments: false,
-				}
-			}
-		},
-		karma: {
-			unit: {
+					out: 'app/dist/js/main.built.js'
+					name: 'main'
+					preserveLicenseComments: false
+
+		karma:
+			unit:
 				configFile: 'config/karma.conf.js'
-			},
-			e2e: {
+				singleRun: false
+			e2e:
 				configFile: 'config/karma-e2e.conf.js'
-			}
-		},
-		concurrent: {
-			server: ['watch', 'connect'],
-			options: {
+
+		concurrent:
+			server: ['watch', 'connect', 'karma:unit', 'notify_hooks']
+			options:
 				logConcurrentOutput: true
-			}
-		},
-		targethtml: {
-			dist: {
-				files: {
+
+		targethtml:
+			dist:
+				files:
 					'index.html': 'index.pre.html'
-				}
-			}
-			dev: {
-				files: {
+			dev:
+				files:
 					'index.html': 'index.pre.html'
-				},
-				options: {
-					curlyTags: {
-			        	rlsdate: '<%= grunt.template.today("yyyymmdd") %>'
-				    }	
-				}	
-			}
-		},
-		autoprefixer: {
-			options: {
+				options:
+					curlyTags:
+						rlsdate: '<%= grunt.template.today("yyyymmdd") %>'
+
+		autoprefixer:
+			options:
 				# https://github.com/ai/autoprefixer#browsers
 				browsers: ["last 1 version", "> 1%", "ie 8", "ie 7"]
-			}
-			dev: {
+			dev:
 				src: 'app/css/app.css'
 				dest: 'app/css/app.css'
-			}
-		},
-		cssmin: {
+
+		cssmin:
 			'app/dist/css/app.css': '<%= files.css %>'
-		}
-	}
+		notify_hooks:
+			options:
+				enabled: true
+				max_jshint_notifications: 5
+
+
 	npmTasks = [
 		'grunt-contrib-jshint'
 		'grunt-contrib-compass'
@@ -170,6 +140,7 @@ module.exports = (grunt) ->
 		'grunt-contrib-cssmin'
 		# migrated from grunt-contrib-sass because it's faster, but no line number option
 		'grunt-sass'
+		'grunt-notify'
 	]
 	grunt.loadNpmTasks(task) for task in npmTasks
 
@@ -180,5 +151,5 @@ module.exports = (grunt) ->
 	grunt.registerTask 'server', 'launch the server', (n) ->
 		if grunt.option('dist')
 			grunt.task.run ['build', 'concurrent:server']
-		else 
+		else
 			grunt.task.run ['targethtml:dev', 'concurrent:server']
