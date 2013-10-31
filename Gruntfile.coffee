@@ -22,7 +22,7 @@ module.exports = (grunt) ->
 				jshintrc:'.jshintrc'
 			}
 		}
-		compass: {	
+		compass: {
 			config: 'config.rb',
 			dev: {
 				options: {
@@ -33,7 +33,7 @@ module.exports = (grunt) ->
 				options: {
 					environment: 'production'
 					cssDir: 'app/dist/css'
-				}	
+				}
 			}
 		},
 		sass: {
@@ -139,8 +139,8 @@ module.exports = (grunt) ->
 				options: {
 					curlyTags: {
 			        	rlsdate: '<%= grunt.template.today("yyyymmdd") %>'
-				    }	
-				}	
+				    }
+				}
 			}
 		},
 		autoprefixer: {
@@ -180,5 +180,5 @@ module.exports = (grunt) ->
 	grunt.registerTask 'server', 'launch the server', (n) ->
 		if grunt.option('dist')
 			grunt.task.run ['build', 'concurrent:server']
-		else 
+		else
 			grunt.task.run ['targethtml:dev', 'concurrent:server']
