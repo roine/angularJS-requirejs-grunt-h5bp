@@ -18,6 +18,7 @@ define([
 				mocks.inject(function($compile, $rootScope) {
 					var element = $compile('<span app-version></span>')($rootScope);
 					expect(element.text()).toEqual('TEST_VER');
+					// expect(false).toEqual(true);
 				});
 			});
 		});
